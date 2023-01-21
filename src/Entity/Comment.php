@@ -27,6 +27,10 @@ class Comment
     #[ORM\Column]
     private ?\DateTimeImmutable $ModifiedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Recipe $recipe = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +80,18 @@ class Comment
     public function setModifiedAt(\DateTimeImmutable $ModifiedAt): self
     {
         $this->ModifiedAt = $ModifiedAt;
+
+        return $this;
+    }
+
+    public function getRecipe(): ?Recipe
+    {
+        return $this->recipe;
+    }
+
+    public function setRecipe(?Recipe $recipe): self
+    {
+        $this->recipe = $recipe;
 
         return $this;
     }
