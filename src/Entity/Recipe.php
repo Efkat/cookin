@@ -82,7 +82,7 @@ class Recipe
         return $this;
     }
 
-    public function getPreparationTime(): ?intAt
+    public function getPreparationTime(): ?int
     {
         return $this->PreparationTime;
     }
