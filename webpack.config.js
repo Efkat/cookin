@@ -59,6 +59,9 @@ Encore
     // enables Sass/SCSS support
     //.enableSassLoader()
 
+    //enable PostCss Loader
+    .enablePostCssLoader()
+
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
