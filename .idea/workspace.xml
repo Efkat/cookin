@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="722877bf-0a86-4798-9939-6834b400ec30" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/UML/classDiagram.drawio" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -153,7 +153,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="2RD8aGCbTPZbW3pC9Sjf8HLoRUQ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -196,7 +198,7 @@
       <workItem from="1686932786619" duration="1126000" />
       <workItem from="1686934703473" duration="1802000" />
       <workItem from="1687289824233" duration="2082000" />
-      <workItem from="1687364025591" duration="632000" />
+      <workItem from="1687364025591" duration="3725000" />
     </task>
     <servers />
   </component>
