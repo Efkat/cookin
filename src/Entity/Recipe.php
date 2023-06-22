@@ -32,6 +32,9 @@ class Recipe
     #[ORM\Column]
     private ?int $preparationTime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?Category $Category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Recipe
     public function setPreparationTime(int $preparationTime): static
     {
         $this->preparationTime = $preparationTime;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->Category;
+    }
+
+    public function setCategory(?Category $Category): static
+    {
+        $this->Category = $Category;
 
         return $this;
     }
