@@ -40,9 +40,13 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'recipes')]
     private Collection $Tags;
 
+    #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Ingredient::class, orphanRemoval: true)]
+    private Collection $ingredientsList;
+
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
+        $this->ingredientsList = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,6 +158,36 @@ class Recipe
     public function removeTag(Tag $tag): static
     {
         $this->Tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredientsList(): Collection
+    {
+        return $this->ingredientsList;
+    }
+
+    public function addIngredientsList(Ingredient $ingredientsList): static
+    {
+        if (!$this->ingredientsList->contains($ingredientsList)) {
+            $this->ingredientsList->add($ingredientsList);
+            $ingredientsList->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredientsList(Ingredient $ingredientsList): static
+    {
+        if ($this->ingredientsList->removeElement($ingredientsList)) {
+            // set the owning side to null (unless already changed)
+            if ($ingredientsList->getRecipe() === $this) {
+                $ingredientsList->setRecipe(null);
+            }
+        }
 
         return $this;
     }
