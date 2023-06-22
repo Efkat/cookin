@@ -43,6 +43,9 @@ class Recipe
     #[ORM\OneToMany(mappedBy: 'recipe', targetEntity: Ingredient::class, orphanRemoval: true)]
     private Collection $ingredientsList;
 
+    #[ORM\ManyToOne(inversedBy: 'Recipes')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
@@ -188,6 +191,18 @@ class Recipe
                 $ingredientsList->setRecipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -32,6 +34,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $Email = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Recipe::class)]
+    private Collection $Recipes;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class, orphanRemoval: true)]
+    private Collection $Review;
+
+    public function __construct()
+    {
+        $this->Recipes = new ArrayCollection();
+        $this->Review = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,6 +137,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $Email): static
     {
         $this->Email = $Email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->Recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): static
+    {
+        if (!$this->Recipes->contains($recipe)) {
+            $this->Recipes->add($recipe);
+            $recipe->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): static
+    {
+        if ($this->Recipes->removeElement($recipe)) {
+            // set the owning side to null (unless already changed)
+            if ($recipe->getUser() === $this) {
+                $recipe->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReview(): Collection
+    {
+        return $this->Review;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->Review->contains($review)) {
+            $this->Review->add($review);
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->Review->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
+            }
+        }
 
         return $this;
     }
